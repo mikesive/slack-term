@@ -6,8 +6,8 @@ var app = express();
 app.post('/remote', function (req, res) {
   // var remoteName = req.query.text;
   // var remoteHost = req.query.remoteHost;
-  console.log('Request received...\ndata: %j', req);
-  res.send('POST request data: ' + req);
+  console.log('Request received...\ndata: ' + req.param('text'));
+  res.send('POST request data: ' + req.param('text'));
 });
 
 console.log('listening...');
