@@ -7,7 +7,7 @@ app.post('/remote', function (req, res) {
   var remoteName = req.query.text;
   var remoteHost = req.query.remoteHost;
   console.log('Request received...\ndata: ' + text);
-  res.send('POST request to the homepage\n');
+  res.send('POST request data: ' + text);
 });
 
 console.log('listening...');
