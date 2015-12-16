@@ -7,8 +7,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/remote', function (req, res) {
   // var remoteName = req.query.text;
   // var remoteHost = req.query.remoteHost;
-  console.log('Request received...\ndata: ' + JSON.stringify(req.query.text));
-  res.send('POST request data: ' + req.query.text + "\n");
+  console.log('Request received...\ndata: ' + JSON.stringify(req, null, 4));
+  res.send('POST request data: ' + JSON.stringify(req, null, 4) + "\n");
 });
 
 console.log('listening...');
