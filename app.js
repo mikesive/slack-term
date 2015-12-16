@@ -21,7 +21,7 @@ app.post('/remote', function (req, res) {
   request = requestData.text;
   user_id = requestData.user_id;
   var subRouter = new SubRouter(request);
-  var errors = SubRouter.getErrors();
+  var errors = subRouter.getErrors();
   if (errors.length > 0){
     res.send(errors.join("\n"));
   }
