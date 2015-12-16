@@ -4,8 +4,13 @@ module.exports = function SubRouter(request){
   this.args = [];
   this.requestType = null;
   var self = this;
+
   checkRequestType();
   checkErrors();
+
+  this.getErrors = function(){
+    return self.errors;
+  };
 
   function checkRequestType(){
     if (requestBeginsWith("\n")){
@@ -41,10 +46,6 @@ module.exports = function SubRouter(request){
       self.errors.push("<Create/Delete> user");
       self.errors.push("<remote name>\ncommand 1\ncommand 2\n...");
     }
-  }
-
-  function getErrors(){
-    return self.errors;
   }
 
   function requestBeginsWith(str){
