@@ -1,5 +1,5 @@
 var executionHandler = require('./executionHandler');
-module.exports = function SubRouter(request, finish){
+module.exports = function SubRouter(dbProvider, request, finish){
   this.request = request;
   this.result = {};
   this.errors = [];
@@ -18,7 +18,7 @@ module.exports = function SubRouter(request, finish){
       self.finish(self.result);
     }
     else {
-      var execHandler = new ExecutionHandler(self.requestType, self.args, self.finish);
+      var execHandler = new ExecutionHandler(dbProvider, self.requestType, self.args, self.finish);
       execHandler.execute();
     }
   }

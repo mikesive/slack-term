@@ -1,13 +1,11 @@
-module.exports = function ExecutionHandler(requestType, args, finish){
-  // Connect to Mongo
-  var mongoose = require('mongoose');
+module.exports = function ExecutionHandler(dbProvider, requestType, args, finish){
   var dbURI = process.env.MONGOLAB_URI || "mongodb://localhost/sshlack";
   mongoose.connect(dbURI);
 
   // Models
-  var Remote = require('../models/remote')(mongoose);
-  var User = require('../models/user')(mongoose);
-  
+  var Remote = require('../models/remote')(dbProvider);
+  var User = require('../models/user')(dbProvider);
+
   this.requestType = requestType;
   this.args = args;
   this.result = {};
