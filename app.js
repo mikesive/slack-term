@@ -14,7 +14,7 @@ app.post('/remote', function (req, res) {
   user_id = requestData.user_id;
   var commandSet = new CommandSet(commands);
   var errors = commandSet.getErrors();
-  if (errors.length() > 0){
+  if (errors.length > 0){
     res.send(errors.join("\n"));
   }
   else {
