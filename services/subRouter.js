@@ -1,4 +1,4 @@
-var executionHandler = require('./executionHandler');
+var ExecutionHandler = require('./executionHandler');
 module.exports = function SubRouter(request, finish){
   this.request = request;
   this.result = {};
@@ -14,7 +14,6 @@ module.exports = function SubRouter(request, finish){
     checkErrors(self.requestType, self.args);
     if (self.errors.length > 0){
       self.result.errors = self.errors;
-      console.log("Finishing subrouter error.");
       finish(self.result);
     }
     else {

@@ -16,11 +16,9 @@ app.post('/remote', function (req, res) {
   user_id = requestData.user_id;
   var subRouter = new SubRouter(request, function(result){
     if (result.errors){
-      console.log("Finishing main.");
       res.send(result.errors.join("\n"));
     }
     else {
-      console.log("Finishing main.");
       res.send('Success: ' + result.message + "\n");
     }
   });
