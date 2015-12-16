@@ -6,12 +6,19 @@ module.exports = function SubRouter(request){
   var self = this;
 
   checkRequestType();
-  checkErrors();
+  checkErrors(self.requestType, self.args);
 
+  // Return errors array
   this.getErrors = function(){
     return self.errors;
   };
 
+  // Check if request begins with argument
+  function requestBeginsWith(str){
+    return self.request.substring(0, str.length) === str;
+  }
+
+  // Determine the request type
   function checkRequestType(){
     if (requestBeginsWith("\n")){
       self.requestType = "SSH";
@@ -31,12 +38,13 @@ module.exports = function SubRouter(request){
     }
   }
 
-  function checkErrors(){
+  // Appends errors to error array if request is invalid
+  function checkErrors(requestType, args){
     var invalid = false;
-    if (self.requestType === "Invalid"){
+    if (requestType === "Invalid"){
       invalid = true;
     }
-    else if (self.requestType === "Create" || self.requestType === "Delete"){
+    else if (requestType === "Create" || requestType === "Delete"){
       invalid = invalidCreateOrDelete(args);
     }
     if (invalid){
@@ -48,10 +56,7 @@ module.exports = function SubRouter(request){
     }
   }
 
-  function requestBeginsWith(str){
-    return self.request.substring(0, str.length) === str;
-  }
-
+  // Checks for validity of create or delete arguments
   function invalidCreateOrDelete(args){
     var invalid = false;
     if (args.length < 1){
