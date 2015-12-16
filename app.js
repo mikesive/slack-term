@@ -12,4 +12,5 @@ app.post('/remote', function (req, res) {
 });
 
 console.log('listening...');
-app.listen(9000);
+var port = process.env.PORT || 3000;
+app.listen(port);
