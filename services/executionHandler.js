@@ -13,6 +13,7 @@ module.exports = function ExecutionHandler(requestType, args, finish){
   this.result = {};
 
   var self = this;
+  execute();
 
   function execute(){
     var result;
