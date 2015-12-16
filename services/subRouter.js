@@ -16,12 +16,12 @@ module.exports = function SubRouter(request){
     if (requestBeginsWith("\n")){
       self.requestType = "SSH";
     }
-    else if (requestBeginsWith("Create")){
+    else if (requestBeginsWith("create")){
       self.requestType = "Create";
       self.args = self.request.split(" ");
       self.args.shift();
     }
-    else if (requestBeginsWith("Delete")){
+    else if (requestBeginsWith("delete")){
       self.requestType = "Delete";
       self.args = self.request.split(" ");
       self.args.shift();
