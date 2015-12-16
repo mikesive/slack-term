@@ -1,15 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://heroku_t1cnkm5k:2gdeul69rmneiftotfi0l1p9kq@ds033135.mongolab.com:33135/heroku_t1cnkm5k');
 
 // Services
 var CommandSet = require('./services/commandSet');
 var SubRouter = require('./services/subRouter');
-
-// Models
-// var Remote = require('./models/remote')(mongoose);
-// var User = require('./models/user')(mongoose);
 
 // Set up server
 var app = express();

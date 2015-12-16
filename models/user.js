@@ -1,11 +1,10 @@
-var userSchema = mongoose.Schema(
-  {
-    userName: String,
-    userId: String,
-    teamToken: String
-  }
-);
-
-module.exports = function(mongoose){
-  mongoose.model('User', userSchema);
+module.exports = function(dbProvider){
+  var userSchema = dbProvider.Schema(
+    {
+      userName: String,
+      userId: String,
+      teamToken: String
+    }
+  );
+  dbProvider.model('User', userSchema);
 };

@@ -1,3 +1,4 @@
+var executionHandler = require('./executionHandler');
 module.exports = function SubRouter(request){
   this.request = request;
   this.errors = [];
@@ -12,6 +13,11 @@ module.exports = function SubRouter(request){
   this.getErrors = function(){
     return self.errors;
   };
+
+  // Execute request
+  function execute(){
+    var execHandler = new ExecutionHandler(self.requestType, self.args);
+  }
 
   // Check if request begins with argument
   function requestBeginsWith(str){
