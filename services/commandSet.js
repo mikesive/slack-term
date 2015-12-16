@@ -15,6 +15,7 @@ module.exports = function CommandSet(commands){
   }
 
   function testNewLine(){
-    return this.commands.startsWith("\n");
+    var newline = "\n";
+    return this.commands.substring(0, newline.length) === newline;
   }
 };
