@@ -50,7 +50,7 @@ module.exports = function SubRouter(request){
     if (invalid){
       self.errors.push("Invalid command...");
       self.errors.push("Valid commands:");
-      self.errors.push("<Create/Delete> remote <name>");
+      self.errors.push("<Create/Delete> remote <name> <username> <host>");
       self.errors.push("<Create/Delete> user");
       self.errors.push("<remote name>\ncommand 1\ncommand 2\n...");
     }
@@ -63,15 +63,27 @@ module.exports = function SubRouter(request){
       invalid = true;
     }
     else if (args[0] === "user"){
-      if (args.length !== 1){
-        invalid = true;
-      }
+      invalid = invalidUserArgs(args);
     }
     else if (args[0] === "remote"){
-      if (args.length !== 2){
-        invalid = true;
-      }
+      invalid = invalidRemoteArgs(args);
     }
     return invalid;
+  }
+
+  // Checks for invalid user arguments
+  function invalidUserArgs(args){
+    if (args.length !== 1){
+      return true;
+    }
+    return false;
+  }
+
+  // Checks for invalid remote arguments
+  function invalidRemoteArgs(args){
+    if (args.length !== 4){
+      return true;
+    }
+    return false;
   }
 };
