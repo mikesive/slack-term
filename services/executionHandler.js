@@ -37,7 +37,7 @@ module.exports = function ExecutionHandler(requestType, args){
       //TODO
     }
     else {
-      var result = "Something went wrong.";
+      var result = "Error: not a valid model type";
     }
   }
 
