@@ -1,10 +1,17 @@
 {
   "name": "Shhlack",
   "version": "0.0.1",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "mongoose": "^4.2.10"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node": "0.12.2"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
 }
