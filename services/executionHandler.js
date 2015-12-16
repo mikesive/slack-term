@@ -60,7 +60,7 @@ module.exports = function ExecutionHandler(requestType, args, finish){
       self.finish(self.result);
     }
     else {
-      self.result = result.errors = ["Error: not a valid modelType"];
+      self.result.errors = ["Error: not a valid modelType"];
       self.finish(self.result);
     }
   }
