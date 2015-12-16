@@ -1,4 +1,4 @@
-var CommandSet = function(commands){
+module.exports = function CommandSet(commands){
   this.commands = commands;
   this.errors = [];
   this.checkErrors();
@@ -9,7 +9,7 @@ var CommandSet = function(commands){
       this.errors.push("Please start your commands with a newline character (Shift + Enter in Slack).");
     }
   };
-  
+
   this.getErrors = function(){
     return this.errors;
   };
