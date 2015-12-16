@@ -7,11 +7,10 @@ module.exports = function SubRouter(request, finish){
   this.requestType = null;
   var self = this;
 
-  checkRequestType();
-  checkErrors(self.requestType, self.args);
-
   // Execute request
   function execute(){
+    checkRequestType();
+    checkErrors(self.requestType, self.args);
     if (self.errors.length > 0){
       self.result.errors = self.errors;
       console.log("Finishing subrouter error.");
