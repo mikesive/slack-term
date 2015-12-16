@@ -1,8 +1,4 @@
 module.exports = function CommandSet(commands){
-  this.commands = commands;
-  this.errors = [];
-  this.checkErrors();
-
 
   this.checkErrors = function(){
     if (!this.testNewLine()){
@@ -17,4 +13,8 @@ module.exports = function CommandSet(commands){
   this.testNewLine = function(){
     return this.commands.startsWith("\n");
   };
+
+  this.commands = commands;
+  this.errors = [];
+  this.checkErrors();
 };
