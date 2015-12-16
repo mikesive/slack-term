@@ -8,8 +8,8 @@ var CommandSet = require('./services/commandSet');
 var SubRouter = require('./services/subRouter');
 
 // Models
-var Remote = require('./models/remote')(mongoose);
-var User = require('./models/user')(mongoose);
+// var Remote = require('./models/remote')(mongoose);
+// var User = require('./models/user')(mongoose);
 
 // Set up server
 var app = express();
