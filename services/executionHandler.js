@@ -7,9 +7,10 @@ mongoose.connect(dbURI);
 var Remote = require('../models/remote')(mongoose);
 var User = require('../models/user')(mongoose);
 
-module.exports = function ExecutionHandler(requestType, args){
+module.exports = function ExecutionHandler(requestType, args, finish){
   this.requestType = requestType;
   this.args = args;
+  this.result = {};
 
   var self = this;
 
@@ -18,38 +19,49 @@ module.exports = function ExecutionHandler(requestType, args){
     var params = self.args;
     if (self.requestType == "Create"){
       self.modelType = params.shift();
-      result = createRecord(modelType, params);
+      createRecord(modelType, params, finish);
     }
     else if (self.requestType == "Delete"){
       self.modelType = params.shift();
-      result = deleteRecord(modelType, params);
+      deleteRecord(modelType, params, finish);
     }
     else {
-      result = "Error: not a valid requestType";
+      self.result.errors = ["Error: not a valid requestType"];
+      self.finish(self.result);
     }
   }
 
-  function createRecord(model, args){
+  function createRecord(model, args, finish){
     if (model == "user"){
       //TODO
+      self.result.message = "Created User... //TODO";
+      self.finish(self.result);
     }
     else if (model == "remote"){
       //TODO
+      self.result.message = "Created Remote... //TODO";
+      self.finish(self.result);
     }
     else {
-      var result = "Error: not a valid model type";
+      self.result.errors = ["Error: not a valid modelType"];
+      self.finish(self.result);
     }
   }
 
-  function deleteRecord(model, args){
+  function deleteRecord(model, args, finish){
     if (model == "user"){
       //TODO
+      self.result.message = "Deleted User... //TODO";
+      self.finish(self.result);
     }
     else if (model == "remote"){
       //TODO
+      self.result.message = "Deleted Remote... //TODO";
+      self.finish(self.result);
     }
     else {
-      var result = "Error: not a valid model type";
+      self.result = result.errors = ["Error: not a valid modelType"];
+      self.finish(self.result);
     }
   }
 };

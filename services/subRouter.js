@@ -1,22 +1,26 @@
 var executionHandler = require('./executionHandler');
-module.exports = function SubRouter(request){
+module.exports = function SubRouter(request, finish){
   this.request = request;
+  this.result = {};
   this.errors = [];
   this.args = [];
   this.requestType = null;
+  this.finish = finish;
   var self = this;
 
   checkRequestType();
   checkErrors(self.requestType, self.args);
 
-  // Return errors array
-  this.getErrors = function(){
-    return self.errors;
-  };
-
   // Execute request
   function execute(){
-    var execHandler = new ExecutionHandler(self.requestType, self.args);
+    if (self.errors.length > 0){
+      self.result.errors = self.errors;
+      self.finish(self.result);
+    }
+    else {
+      var execHandler = new ExecutionHandler(self.requestType, self.args, self.finish);
+      execHandler.execute();
+    }
   }
 
   // Check if request begins with argument
