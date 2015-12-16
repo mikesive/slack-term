@@ -5,7 +5,6 @@ module.exports = function SubRouter(request, finish){
   this.errors = [];
   this.args = [];
   this.requestType = null;
-  this.finish = finish;
   var self = this;
 
   checkRequestType();
@@ -16,10 +15,10 @@ module.exports = function SubRouter(request, finish){
     if (self.errors.length > 0){
       self.result.errors = self.errors;
       console.log("Finishing subrouter error.");
-      self.finish(self.result);
+      finish(self.result);
     }
     else {
-      var execHandler = new ExecutionHandler(self.requestType, self.args, self.finish);
+      var execHandler = new ExecutionHandler(self.requestType, self.args, finish);
       execHandler.execute();
     }
   }

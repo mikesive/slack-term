@@ -28,7 +28,7 @@ module.exports = function ExecutionHandler(requestType, args, finish){
     else {
       self.result.errors = ["Error: not a valid requestType"];
       console.log("Finishing exechandler error.");
-      self.finish(self.result);
+      finish(self.result);
     }
   }
 
@@ -37,18 +37,18 @@ module.exports = function ExecutionHandler(requestType, args, finish){
       //TODO
       self.result.message = "Created User... //TODO";
       console.log("Finishing exechandler Success.");
-      self.finish(self.result);
+      finish(self.result);
     }
     else if (model == "remote"){
       //TODO
       self.result.message = "Created Remote... //TODO";
       console.log("Finishing exechandler Success.");
-      self.finish(self.result);
+      finish(self.result);
     }
     else {
       self.result.errors = ["Error: not a valid modelType"];
       console.log("Finishing exechandler error.");
-      self.finish(self.result);
+      finish(self.result);
     }
   }
 
@@ -56,17 +56,17 @@ module.exports = function ExecutionHandler(requestType, args, finish){
     if (model == "user"){
       //TODO
       self.result.message = "Deleted User... //TODO";
-      self.finish(self.result);
+      finish(self.result);
     }
     else if (model == "remote"){
       //TODO
       self.result.message = "Deleted Remote... //TODO";
-      self.finish(self.result);
+      finish(self.result);
     }
     else {
       self.result.errors = ["Error: not a valid modelType"];
       console.log("Finishing exechandler error.");
-      self.finish(self.result);
+      finish(self.result);
     }
   }
 };
