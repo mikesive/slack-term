@@ -6,6 +6,7 @@ module.exports = function SubRouter(request, finish){
   this.args = [];
   this.requestType = null;
   var self = this;
+  execute();
 
   // Execute request
   function execute(){

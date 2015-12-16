@@ -23,7 +23,7 @@ app.post('/remote', function (req, res) {
       console.log("Finishing main.");
       res.send('Success: ' + result.message + "\n");
     }
-  }).execute();
+  });
 });
 
 var port = process.env.PORT || 3000;
