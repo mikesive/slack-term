@@ -1,5 +1,5 @@
+var ExecutionHandler = require('./executionHandler');
 module.exports = function SubRouter(request, finish){
-  var ExecutionHandler = require('./executionHandler');
   this.request = request;
   this.result = {};
   this.errors = [];

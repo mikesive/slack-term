@@ -20,11 +20,11 @@ module.exports = function ExecutionHandler(requestType, args, finish){
     var params = self.args;
     if (self.requestType == "Create"){
       self.modelType = params.shift();
-      createRecord(modelType, params, finish);
+      createRecord(self.modelType, params, finish);
     }
     else if (self.requestType == "Delete"){
       self.modelType = params.shift();
-      deleteRecord(modelType, params, finish);
+      deleteRecord(self.modelType, params, finish);
     }
     else {
       self.result.errors = ["Error: not a valid requestType"];
