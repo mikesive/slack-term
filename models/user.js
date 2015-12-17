@@ -12,7 +12,10 @@ module.exports = function(dbProvider){
     create: function(params, finish){
       var q = User.where(params);
       q.findOne(function(err, user){
-        if (err){
+        if (user){
+          finish({errors: ["Error: User already exists - " + params.userName]});
+        }
+        else {
           var newUser = new User(params);
           newUser.save(function(error){
             if (error){
@@ -22,9 +25,6 @@ module.exports = function(dbProvider){
               finish({message: "User created: " + params.userName});
             }
           });
-        }
-        else {
-          finish({errors: ["Error: User already exists - " + params.userName]});
         }
       });
     }
