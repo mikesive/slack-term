@@ -14,9 +14,8 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
   this.credentials = credentials;
 
   var self = this;
-  execute();
 
-  function execute(){
+  this.execute = function(){
     var result;
     var params = self.args;
     if (self.requestType == "Create"){
@@ -31,7 +30,7 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
       self.result.errors = ["Error: not a valid requestType"];
       finish(self.result);
     }
-  }
+  };
 
   function createRecord(model, args, finish){
     if (model == "user"){
