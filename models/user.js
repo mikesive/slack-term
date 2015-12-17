@@ -16,7 +16,7 @@ module.exports = function(dbProvider){
           var newUser = new User(params);
           newUser.save(function(error){
             if (error){
-              finish({error: ["Error: " + error]});
+              finish({errors: ["Error: " + error]});
             }
             else {
               finish({message: "User created: " + params.userName});
@@ -24,7 +24,7 @@ module.exports = function(dbProvider){
           });
         }
         else {
-          finish({error: ["Error: User already exists - " + params.userName]});
+          finish({errors: ["Error: User already exists - " + params.userName]});
         }
       });
     }
