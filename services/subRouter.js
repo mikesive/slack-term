@@ -1,5 +1,8 @@
 var ExecutionHandler = require('./executionHandler');
 module.exports = function SubRouter(request, credentials, finish){
+
+  var slackToken = process.env.SLACK_TOKEN;
+
   this.request = request;
   this.result = {};
   this.errors = [];
@@ -11,15 +14,21 @@ module.exports = function SubRouter(request, credentials, finish){
 
   // Execute request
   function execute(){
-    checkRequestType();
-    checkErrors(self.requestType, self.args);
-    if (self.errors.length > 0){
-      self.result.errors = self.errors;
+    if (self.credentials.slackToken != slackToken){
+      self.result.errors = ["Error: Invalid Slack Token."];
       finish(self.result);
     }
     else {
-      var execHandler = new ExecutionHandler(credentials, self.requestType, self.args, finish);
-      execHandler.execute();
+      checkRequestType();
+      checkErrors(self.requestType, self.args);
+      if (self.errors.length > 0){
+        self.result.errors = self.errors;
+        finish(self.result);
+      }
+      else {
+        var execHandler = new ExecutionHandler(credentials, self.requestType, self.args, finish);
+        execHandler.execute();
+      }
     }
   }
 

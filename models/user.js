@@ -3,7 +3,7 @@ module.exports = function(dbProvider){
     {
       userName: String,
       userId: String,
-      teamToken: String
+      teamId: String
     }
   );
   return dbProvider.model('User', userSchema);

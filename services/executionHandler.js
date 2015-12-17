@@ -38,7 +38,7 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
         {
           userName: self.credentials.userId,
           userId: self.credentials.userToken,
-          teamToken: self.credentials.teamToken
+          teamId: self.credentials.teamToken
         }
       );
       user.save(function(error){
@@ -46,7 +46,7 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
           self.result.errors = ["Error: " + error];
         }
         else {
-          self.result.message = "Successfully created user " + self.credentials.userId;
+          self.result.message = "Successfully created user " + self.credentials.userName;
         }
         finish(self.result);
       });

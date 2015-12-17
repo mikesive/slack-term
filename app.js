@@ -14,9 +14,10 @@ app.post('/remote', function (req, res) {
   requestData = req.body;
   request = requestData.text;
   var credentials = {
+    userName: requestData.user_name,
     userId: requestData.user_id,
-    userToken: requestData.user_token,
-    teamToken: requestData.teamToken
+    teamId: requestData.team_id,
+    slackToken: requestData.token
   };
   var subRouter = new SubRouter(request, credentials, function(result){
     if (result.errors){
