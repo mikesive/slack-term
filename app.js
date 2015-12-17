@@ -13,8 +13,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/remote', function (req, res) {
   requestData = req.body;
   request = requestData.text;
-  user_id = requestData.user_id;
-  var subRouter = new SubRouter(request, userId, userToken, teamToken, function(result){
+  var credentials = {
+    userId: requestData.user_id,
+    userToken: requestData.user_token,
+    teamToken: requestData.teamToken
+  };
+  var subRouter = new SubRouter(request, credentials, function(result){
     if (result.errors){
       res.send(result.errors.join("\n"));
     }

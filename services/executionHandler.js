@@ -7,13 +7,11 @@ mongoose.connect(dbURI);
 var Remote = require('../models/remote')(mongoose);
 var User = require('../models/user')(mongoose);
 
-module.exports = function ExecutionHandler(requestType, userId, userToken, teamToken, args, finish){
+module.exports = function ExecutionHandler(credentials, requestType, args, finish){
   this.requestType = requestType;
   this.args = args;
   this.result = {};
-  this.userId = userId;
-  this.userToken = userToken;
-  this.teamToken = teamToken;
+  this.credentials = credentials;
 
   var self = this;
   execute();
@@ -37,13 +35,19 @@ module.exports = function ExecutionHandler(requestType, userId, userToken, teamT
 
   function createRecord(model, args, finish){
     if (model == "user"){
-      var user = new User({userName: self.userId, userId: userToken, teamToken: teamToken});
+      var user = new User(
+        {
+          userName: self.credentials.userId,
+          userId: self.credentials.userToken,
+          teamToken: self.credentials.teamToken
+        }
+      );
       user.save(function(error){
         if (error){
           self.result.errors = ["Error: " + error];
         }
         else {
-          self.result.message = "Successfully created user " + self.userId;
+          self.result.message = "Successfully created user " + self.credentials.userId;
         }
         finish(self.result);
       });
