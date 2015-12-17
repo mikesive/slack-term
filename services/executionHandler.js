@@ -42,9 +42,13 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
       User.create(params, finish);
     }
     else if (model == "remote"){
-      //TODO
-      self.result.message = "Created Remote... //TODO";
-      finish(self.result);
+      params = {
+        name: args[0],
+        user: args[1],
+        host: args[2],
+        teamId: self.credentials.teamId
+      };
+      Remote.create(params, finish);
     }
     else {
       self.result.errors = ["Error: not a valid modelType"];
