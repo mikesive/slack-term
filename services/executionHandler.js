@@ -34,22 +34,12 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
 
   function createRecord(model, args, finish){
     if (model == "user"){
-      var user = new User(
-        {
-          userName: self.credentials.userName,
-          userId: self.credentials.userId,
-          teamId: self.credentials.teamId
-        }
-      );
-      user.save(function(error){
-        if (error){
-          self.result.errors = ["Error: " + error];
-        }
-        else {
-          self.result.message = "Created user " + self.credentials.userName;
-        }
-        finish(self.result);
-      });
+      params = {
+        userName: self.credentials.userName,
+        userId: self.credentials.userId,
+        teamId: self.credentials.teamId
+      };
+      User.create(params, finish);
     }
     else if (model == "remote"){
       //TODO
