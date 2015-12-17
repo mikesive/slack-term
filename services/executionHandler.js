@@ -58,9 +58,12 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
 
   function deleteRecord(model, args, finish){
     if (model == "user"){
-      //TODO
-      self.result.message = "Deleted User... //TODO";
-      finish(self.result);
+      params = {
+        userName: self.credentials.userName,
+        userId: self.credentials.userId,
+        teamId: self.credentials.teamId
+      };
+      User.delete(params, finish);
     }
     else if (model == "remote"){
       //TODO

@@ -27,6 +27,16 @@ module.exports = function(dbProvider){
           });
         }
       });
+    },
+    delete: function(params, finish){
+      User.remove(params, function(err){
+        if (err){
+          finish({errors: ["Error: " + err]});
+        }
+        else {
+          finish({message: "Deleted user - " + params.userName});
+        }
+      });
     }
   };
 };
