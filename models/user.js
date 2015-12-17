@@ -6,5 +6,5 @@ module.exports = function(dbProvider){
       teamToken: String
     }
   );
-  dbProvider.model('User', userSchema);
+  return dbProvider.model('User', userSchema);
 };

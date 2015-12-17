@@ -1,10 +1,13 @@
 var ExecutionHandler = require('./executionHandler');
-module.exports = function SubRouter(request, finish){
+module.exports = function SubRouter(request, userId, userToken, teamToken, finish){
   this.request = request;
   this.result = {};
   this.errors = [];
   this.args = [];
   this.requestType = null;
+  this.userId = userId;
+  this.userToken = userToken;
+  this.teamToken = teamToken;
   var self = this;
   execute();
 

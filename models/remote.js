@@ -5,5 +5,5 @@ module.exports = function(dbProvider){
       user: String
     }
   );
-  dbProvider.model('Remote', remoteSchema);
+  return dbProvider.model('Remote', remoteSchema);
 };
