@@ -29,12 +29,15 @@ module.exports = function(dbProvider){
       });
     },
     delete: function(params, finish){
-      User.remove(params, function(err){
-        if (err){
-          finish({errors: ["Error: " + err]});
+      var q = User.where(params);
+      q.findOne(function(err, user){
+        if (user){
+          User.remove(params, function(error){
+            finish({message: "Deleted user - " + params.userName});
+          });
         }
         else {
-          finish({message: "Deleted user - " + params.userName});
+          finish({errors: ["Error: user " + params.userName + " doesn't exist."]});
         }
       });
     }
