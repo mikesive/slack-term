@@ -41,6 +41,7 @@ module.exports = function SubRouter(request, credentials, finish){
   function checkRequestType(){
     if (requestBeginsWith("\n")){
       self.requestType = "SSH";
+      self.args = self.request.split("\n");
     }
     else if (requestBeginsWith("create")){
       self.requestType = "Create";
@@ -69,7 +70,8 @@ module.exports = function SubRouter(request, credentials, finish){
     if (invalid){
       self.errors.push("Invalid command...");
       self.errors.push("Valid commands:");
-      self.errors.push("<Create/Delete> remote <name> <username> <host>");
+      self.errors.push("Create remote <name> <username> <host>");
+      self.errors.push("Delete remote <name>");
       self.errors.push("<Create/Delete> user");
       self.errors.push("<remote name>\ncommand 1\ncommand 2\n...");
     }
@@ -100,8 +102,15 @@ module.exports = function SubRouter(request, credentials, finish){
 
   // Checks for invalid remote arguments
   function invalidRemoteArgs(args){
-    if (args.length !== 4){
-      return true;
+    if (self.requestType == "Create"){
+      if (args.length !== 4){
+        return true;
+      }
+    }
+    else {
+      if (args.length !== 1){
+        return true;
+      }
     }
     return false;
   }

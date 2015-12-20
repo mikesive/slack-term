@@ -26,11 +26,23 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
       self.modelType = params.shift();
       deleteRecord(self.modelType, params, finish);
     }
+    else if (self.requestType == "SSH"){
+      var remoteName = params.shift();
+      executeCommandSet(credentials.teamId, remoteName, params);
+    }
     else {
       self.result.errors = ["Error: not a valid requestType"];
       finish(self.result);
     }
   };
+
+  function executeCommandSet(teamId, remoteName, commands, finish){
+    params = {
+      name: remoteName,
+      teamId: teamId
+    };
+    Remote.execute(params, commands, finish);
+  }
 
   function createRecord(model, args, finish){
     if (model == "user"){

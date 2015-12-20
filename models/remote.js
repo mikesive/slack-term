@@ -28,6 +28,30 @@ module.exports = function(dbProvider){
           });
         }
       });
+    },
+    delete: function(params, finish){
+      var q = Remote.where(params);
+      q.findOne(function(err, remote){
+        if (remote){
+          Remote.remove(params, function(error){
+            finish({message: "Deleted remote - " + params.name});
+          });
+        }
+        else {
+          finish({errors: ["Error: remote " + params.name + " doesn't exist."]});
+        }
+      });
+    },
+    execute: function(params, commands, finish){
+      var q = Remote.where(params);
+      q.findOne(function(err, remote){
+        if (remote){
+          finish({message: "Running commands - \n" + commands.join("\n")});
+        }
+        else {
+          finish({errors: ["Error: remote " + params.name + " doesn't exist."]});
+        }
+      });
     }
   };
 };

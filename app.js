@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 // Services
-var CommandSet = require('./services/commandSet');
 var SubRouter = require('./services/subRouter');
 
 // Set up server
