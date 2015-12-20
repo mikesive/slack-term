@@ -78,9 +78,11 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
       User.delete(params, finish);
     }
     else if (model == "remote"){
-      //TODO
-      self.result.message = "Deleted Remote... //TODO";
-      finish(self.result);
+      params = {
+        name: args[0],
+        teamId: self.credentials.teamId
+      };
+      Remote.delete(params, finish);
     }
     else {
       self.result.errors = ["Error: not a valid modelType"];
