@@ -40,9 +40,16 @@ var httpsPort = process.env.HTTPSPORT || 443;
 console.log('Listening on '+ port + '...');
 http.createServer(app).listen(port);
 
-var credentials = {
-  key: fs.readFileSync('/etc/letsencrypt/live/sshlack.sive.com.au/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/sshlack.sive.com.au/fullchain.pem'),
-  ca: fs.readFileSync('/etc/letsencrypt/live/sshlack.sive.com.au/chain.pem')
-};
-https.createServer(credentials, app).listen(httpsPort);
+var key_path = process.env.PRIVKEY;
+var cert_path = process.env.CERT;
+var ca_path = process.env.CAPATH;
+
+if (key_path && cert_path && ca_path) {
+  var credentials = {
+    key: fs.readFileSync(key_path),
+    cert: fs.readFileSync(cert_path),
+    ca: fs.readFileSync(ca_path)
+  };
+  console.log('Found SSL settings. Listening on port ' + httpsPort + '...');
+  https.createServer(credentials, app).listen(httpsPort);
+}
