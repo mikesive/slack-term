@@ -42,12 +42,13 @@ module.exports = function(dbProvider){
         }
       });
     },
-    execute: function(sshProvider, params, commands, finish){
+    execute: function(sshProvider, params, commands, returnUrl, finish){
       var q = Remote.where(params);
       result = { errors: [] };
       q.findOne(function(err, remote){
         if (remote){
-          sshProvider.execute();
+          finish({message: "Executing commands at " + params.name});
+          sshProvider.execute(remote.host, remote.user, commands, returnUrl);
         }
         else {
           finish({errors: ["Error: remote " + params.name + " doesn't exist."]});

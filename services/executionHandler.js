@@ -41,7 +41,7 @@ module.exports = function ExecutionHandler(credentials, requestType, args, finis
       name: remoteName,
       teamId: teamId
     };
-    Remote.execute(params, commands, finish);
+    Remote.execute(params, commands, credentials.responseUrl, finish);
   }
 
   function createRecord(model, args, finish){
