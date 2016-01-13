@@ -1,6 +1,6 @@
 Sshlack
 ---------
-Sshlack is a Slack integration written in NodeJS to run SSH commands on remote servers from Slack.
+Sshlack is a Slack integration used to run SSH commands on remote servers from Slack.
 
 #### Setup ####
 The following dependencies are required:
