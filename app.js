@@ -12,11 +12,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Default server test
 app.get('/', function(req, res){
+  console.log('GET /');
   res.send('Success! Server is up.');
 });
 
 // Route for Slack post
 app.post('/remote', function (req, res) {
+  console.log('POST /remote');
   requestData = req.body;
   request = requestData.text;
   var credentials = {
