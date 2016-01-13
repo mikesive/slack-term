@@ -1,4 +1,3 @@
-var SSH = require('simple-ssh');
 module.exports = function(dbProvider){
   var remoteSchema = dbProvider.Schema(
     {
@@ -43,19 +42,12 @@ module.exports = function(dbProvider){
         }
       });
     },
-    execute: function(params, commands, finish){
+    execute: function(sshProvider, params, commands, finish){
       var q = Remote.where(params);
       result = { errors: [] };
       q.findOne(function(err, remote){
         if (remote){
-          // finish({message: "Running commands - \n" + commands.join("\n")});
-          var ssh = new SSH({
-            host: remote.host,
-            user: remote.user
-          });
-
-          
-
+          sshProvider.execute();
         }
         else {
           finish({errors: ["Error: remote " + params.name + " doesn't exist."]});

@@ -1,6 +1,5 @@
 var express = require('express');
 var https = require('https');
-var http = require('http');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 
@@ -24,7 +23,8 @@ app.post('/remote', function (req, res) {
     userName: requestData.user_name,
     userId: requestData.user_id,
     teamId: requestData.team_id,
-    slackToken: requestData.token
+    slackToken: requestData.token,
+    responseUrl: requestData.response_url
   };
   var subRouter = new SubRouter(request, credentials, function(result){
     if (result.errors){
@@ -36,11 +36,7 @@ app.post('/remote', function (req, res) {
   });
 });
 
-var port = process.env.PORT || 3000;
 var httpsPort = process.env.HTTPSPORT || 443;
-console.log('Listening on '+ port + '...');
-http.createServer(app).listen(port);
-
 var key_path = process.env.PRIVKEY;
 var cert_path = process.env.CERT;
 var ca_path = process.env.CAPATH;
