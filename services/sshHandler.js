@@ -6,7 +6,8 @@ module.exports = function(){
     execute: function(host, user, commands, returnUrl){
       var ssh = new SSH({
         host: remote.host,
-        user: remote.user
+        user: remote.user,
+        privateKey: process.ENV.SSH_PRIVATE_KEY
       });
 
       comands.forEach(function(command){

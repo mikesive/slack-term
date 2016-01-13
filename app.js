@@ -39,9 +39,9 @@ app.post('/remote', function (req, res) {
 });
 
 var httpsPort = process.env.HTTPSPORT || 443;
-var key_path = process.env.PRIVKEY;
-var cert_path = process.env.CERT;
-var ca_path = process.env.CAPATH;
+var key_path = process.env.SSL_PRIVATE_KEY;
+var cert_path = process.env.SSL_CERT;
+var ca_path = process.env.SSL_CHAIN;
 if (ca_path && cert_path && key_path){
   var credentials = {
     key: fs.readFileSync(key_path),

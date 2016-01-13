@@ -16,9 +16,10 @@ You will need to setup up a new Slack slash command (e.g. /ssh), and point it to
 #### Configuration ####
 You will need to set the following environment variables on your server:
 * SLACK_TOKEN - Your Slack Slash Command's token
-* PRIVKEY - Path to your private key file
-* CERT - Path to your certificate file
-* CAPATH - Path to your certificate chain file
+* SSL_PRIVATE_KEY - Path to your private key file
+* SSL_CERT - Path to your certificate file
+* SSL_CHAIN - Path to your certificate chain file
+* SSH_PRIVATE_KEY - Path to your ssh key (usually $HOME/.ssh/id_rsa)
 
 You will need to run the ExpressJS server as root if using the default SSL port (443).
 
