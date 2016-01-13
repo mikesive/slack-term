@@ -27,7 +27,6 @@ module.exports = function(){
   };
 
   function postBackToUrl(result){
-    //The url we want is `www.nodejitsu.com:1337/`
     var urlObj = url.parse(returnUrl);
     var host = urlObj.host;
     var path = urlObj.protocol + "//" + urlObj.pathname;
